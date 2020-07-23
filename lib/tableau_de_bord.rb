@@ -5,6 +5,11 @@ class BoardCase
     @@hash_of_cases = {}
     @@positions_left = ["x1","x2","x3","y1","y2","y3","z1","z2","z3"]
 
+    def self.reinit
+        @@hash_of_cases = {}
+        @@positions_left = ["x1","x2","x3","y1","y2","y3","z1","z2","z3"]
+    end
+
     def initialize(name)
         @name = name
         @value = " "
@@ -29,12 +34,13 @@ class BoardCase
     def self.play_turn(player)
         while true
             self.show_board
+            puts
 
             puts " Joueur: #{player.pseudo} a ton tour de jouer "
             puts " où tu veux jouer ? #{@@positions_left}"
             print ">> "
             choice_player = gets.chomp
-            @@positions_left.delete(choice_player) # supprime de la liste des positions restantes 
+            @@positions_left.delete(choice_player) # supprime de la liste des position restante 
             
             player.entree_du_joueur << choice_player
                   
@@ -47,17 +53,12 @@ class BoardCase
             elsif @@hash_of_cases[choice_player] != " "
                 puts "Veuillez saisir une case non occupée (appuyez sur entrée pour choisir à nouveau)"
                 gets
-            
-            # Si tout est bon
             else
                 @@hash_of_cases[choice_player] = player.symbol
                 break
             end
         end
         player.game_over
-    end
-     
-    def self.show_array
-    puts @@array_of_case
-    end
+        
+    end 
 end

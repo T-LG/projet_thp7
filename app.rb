@@ -62,6 +62,7 @@ while true
         puts "Match nul"
         puts
         BoardCase.show_board
+        puts
     end
 
     new_game = ""
@@ -70,11 +71,12 @@ while true
         print "> "
         new_game = gets.chomp
 
-        break if new_game == "non"
+        break if new_game == "non" || new_game == "oui"
         puts "Veuillez saisir oui ou non"
         puts
     end
 
     break if new_game == "non"
-    
+    BoardCase.reinit
+    puts
 end
